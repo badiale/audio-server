@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>badiale</title>
+    <script
+            src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="music">
+    <h1 id="title"></h1>
+    <audio src="/audio" autoplay loop></audio>
+    <button id="mute">Mute</button>
+</div>
+
+<script>
+    $(function () {
+        setInterval(function () {
+            $.get("/file", updateTitle)
+        }, 500)
+
+        $(document.body).on("click", "#mute", function () {
+            var audio = $("audio")[0]
+            audio.volume = audio.volume ? 0 : 1
+        })
+    })
+
+    function updateTitle(data) {
+        $("#title").text(data)
+    }
+</script>
+</body>
+</html>
